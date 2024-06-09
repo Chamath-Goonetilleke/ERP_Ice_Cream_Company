@@ -2,3 +2,5 @@
 ./adwinscom.mwb
 ./adwinscomOverall.mwb
 .gradle
+build
+.idea
