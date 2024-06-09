@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace = "~{fragments/head.html:: headSettings}"></head>
+  <body>
+    <!-- Container for the sidebar content -->
+    <div th:replace = "~{fragments/sidebar.html}"></div>
+    <h2 class="settingsHeader">Settings</h2>
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col-10">
+          <div>
+            <ul class="nav nav-tabs d-flex" id="" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  aria-controls="users-tab-pane"
+                  aria-selected="true"
+                  class="nav-link active"
+                  data-bs-target="#users-tab-pane"
+                  data-bs-toggle="tab"
+                  id="users-tab"
+                  role="tab"
+                  type="button"
+                >
+                  Users
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  aria-controls="roles-tab-pane"
+                  aria-selected="false"
+                  class="nav-link"
+                  data-bs-target="#roles-tab-pane"
+                  data-bs-toggle="tab"
+                  id="roles-tab"
+                  role="tab"
+                  type="button"
+                >
+                  Roles
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  aria-controls="employee-tab-pane"
+                  aria-selected="false"
+                  class="nav-link"
+                  data-bs-target="#employee-tab-pane"
+                  data-bs-toggle="tab"
+                  id="employee-tab"
+                  role="tab"
+                  type="button"
+                >
+                  Employees
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  aria-controls="billing-tab-pane"
+                  aria-selected="false"
+                  class="nav-link"
+                  data-bs-target="#billing-tab-pane"
+                  data-bs-toggle="tab"
+                  id="billing-tab"
+                  role="tab"
+                  type="button"
+                >
+                  Billing
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  aria-controls="profile-tab-pane"
+                  aria-selected="false"
+                  class="nav-link"
+                  data-bs-target="#profile-tab-pane"
+                  data-bs-toggle="tab"
+                  id="profile-tab"
+                  role="tab"
+                  type="button"
+                >
+                  Profile
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content" id="myTabContent">
+            <div th:replace = "~{fragments/user.html}"></div>
+            <div th:replace = "~{fragments/roles.html}"></div>
+            <div th:replace = "~{fragments/employee.html}"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- link sidebar js file -->
+    <script src="/script/sidebar.js"></script>
+
+  </body>
+</html>

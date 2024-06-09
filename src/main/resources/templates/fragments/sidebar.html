@@ -1,0 +1,57 @@
+<div th:fragment ="sidebar" id="sidebarContainer">
+    <div
+            aria-labelledby="offcanvasScrollingLabel"
+            class="offcanvas offcanvas-start"
+            data-bs-backdrop="false"
+            data-bs-scroll="true"
+            id="offcanvasScrolling"
+            tabindex="-1"
+    >
+        <div class="offcanvas-body">
+            <div class="sidenav d-flex flex-column">
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-grip fa-sm"></i>
+                    </div>
+                    <div class="col-10"  ><a href="#dashboard">Dashboard</a></div>
+                </div>
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-ice-cream"></i>
+                    </div>
+                    <div class="col-10" ><a href="/product">Products</a></div>
+                </div>
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-layer-group fa-sm"></i>
+                    </div>
+                    <div class="col-10" ><a href="#inventory">Inventory</a></div>
+                </div>
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <div class="col-10" ><a href="#orders">Sales</a></div>
+                </div>
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-truck-field fa-sm"></i>
+                    </div>
+                    <div class="col-10">
+                        <a href="/supplier">Supplier</a>
+                    </div>
+                </div>
+                <div class="row sideItem" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <div class="col-10"><a href="#reports">Reports</a></div>
+                </div>
+                <div class="row sideItem mt-auto mb-5" onclick="toggleHoverLock(this)">
+                    <div class="col-2 sideIcon"><i class="fa-solid fa-gear"></i></div>
+                    <div class="col-10"><a href="/settings">Settings</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

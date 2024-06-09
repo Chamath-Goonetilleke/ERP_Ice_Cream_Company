@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/bootstrap-5.3.2/css/bootstrap.min.css">
+    <script src="/bootstrap-5.3.2/js/bootstrap.min.js"></script>
+
+    <title>Sign in</title>
+</head>
+
+<body>
+    <div class="container-fluid min-vh-100 position-fixed">
+        <div class="row" style="margin-top: 100px;">
+            <div class="col-3"></div>
+
+            <div class="col-3 p-0" style="background-color: #C3E2C2; height: 450px;">
+                <div id="carouselLogin" class="carousel slide" data-bs-ride="carousel">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLogin"
+                        data-bs-slide="prev">
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselLogin"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <!-- <span class="visually-hidden">Next</span> -->
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-3"
+                style="background-color: #C3E2C2; padding: 60px 80px; height: 450px; background: #a8c0ff; background: -webkit-linear-gradient(to right, #a8c0ff, #3f2b96); background: linear-gradient(to right, #a8c0ff, #3f2b96)">
+                <h3 class="text-center mb-5">Sign in</h3>
+                <form action="/login" method="post">
+                    <div class="row">
+                        <label class="form-label fw-bold" for="inputUserName">User Name : </label>
+                    </div>
+                    <div class="row">
+                        <input class="form-control" type="text" id="inputUserName" placeholder="Enter Your User Name" name="username">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="form-label fw-bold" for="inputPassword">Password : </label>
+                    </div>
+                    <div class="row">
+                        <input class="form-control" type="text" id="inputPassword" placeholder="Enter Your Password" name="password">
+                    </div>
+
+                    <div class="text-center text-danger fw-bold" th:if="${param.error}">
+                        Invalid Username & Password
+                    </div>
+
+                    <div class="row mt-5">
+                        <button class="btn mb-5" type="submit"
+                            style="border-radius: 30px; background-color: #1fb141; color: white;">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</body>
+
+</html>
