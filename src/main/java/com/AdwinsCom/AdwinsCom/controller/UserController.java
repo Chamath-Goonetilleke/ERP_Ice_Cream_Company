@@ -1,5 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ public class UserController {
     @Autowired
     private PrivilegeController privilegeController;
 
+
     @GetMapping
     public ModelAndView userUI(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -36,6 +38,9 @@ public class UserController {
 
         return userView;
     }
+
+//    @GetMapping("/currentUser")
+//    public UserPrincipal getUser(@CurrentUser UserPrincipal userPrincipal){}
 
     @GetMapping(value = "/findall", produces = "application/json")
     public List<User> findAll() {
