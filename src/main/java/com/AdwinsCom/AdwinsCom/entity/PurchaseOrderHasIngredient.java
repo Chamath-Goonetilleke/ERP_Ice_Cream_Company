@@ -39,6 +39,6 @@ public class PurchaseOrderHasIngredient {
     
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
-    private Ingredeint ingredient_id;
+    private Ingredient ingredient_id;
 
 }

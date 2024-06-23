@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
-import com.AdwinsCom.AdwinsCom.dao.RoleDao;
-import com.AdwinsCom.AdwinsCom.dao.UserDao;
+import com.AdwinsCom.AdwinsCom.Repository.RoleDao;
+import com.AdwinsCom.AdwinsCom.Repository.UserDao;
 import com.AdwinsCom.AdwinsCom.entity.Role;
 import com.AdwinsCom.AdwinsCom.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

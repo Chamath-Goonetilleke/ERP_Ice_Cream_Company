@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
 import java.util.List;
-import com.AdwinsCom.AdwinsCom.dao.SupplierDao;
+import com.AdwinsCom.AdwinsCom.Repository.SupplierDao;
 import com.AdwinsCom.AdwinsCom.entity.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

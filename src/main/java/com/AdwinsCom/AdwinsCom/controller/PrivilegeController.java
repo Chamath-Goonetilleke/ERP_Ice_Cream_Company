@@ -1,5 +1,5 @@
 package com.AdwinsCom.AdwinsCom.controller;
-import com.AdwinsCom.AdwinsCom.dao.PrivilegeDao;
+import com.AdwinsCom.AdwinsCom.Repository.PrivilegeDao;
 import com.AdwinsCom.AdwinsCom.entity.Privilege;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

@@ -1,4 +1,4 @@
-package com.AdwinsCom.AdwinsCom.dao;
+package com.AdwinsCom.AdwinsCom.Repository;
 
 import java.util.List;
 

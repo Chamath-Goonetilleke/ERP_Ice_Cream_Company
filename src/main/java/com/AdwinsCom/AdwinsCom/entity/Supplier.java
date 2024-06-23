@@ -63,7 +63,7 @@ public class Supplier {
 
     @ManyToMany
     @JoinTable(name = "supplier_has_ingredient", joinColumns = @JoinColumn(name = "supplier_id"), inverseJoinColumns = @JoinColumn(name = "ingredeint_id"))
-    private Set<Ingredeint> ingredients;
+    private Set<Ingredient> ingredients;
 
     public Supplier(Integer id, String suppliername){
         this.id = id;

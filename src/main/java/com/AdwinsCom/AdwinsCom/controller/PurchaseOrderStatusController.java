@@ -1,5 +1,5 @@
 package com.AdwinsCom.AdwinsCom.controller;
-import com.AdwinsCom.AdwinsCom.dao.PurchaseOrderStatusDao;
+import com.AdwinsCom.AdwinsCom.Repository.PurchaseOrderStatusDao;
 import com.AdwinsCom.AdwinsCom.entity.PurchaseOrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.security;
 
-import com.AdwinsCom.AdwinsCom.dao.UserDao;
+import com.AdwinsCom.AdwinsCom.Repository.UserDao;
 import com.AdwinsCom.AdwinsCom.entity.Role;
 import com.AdwinsCom.AdwinsCom.entity.User;
 import jakarta.transaction.Transactional;

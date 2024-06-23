@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
 import java.util.List;
-import com.AdwinsCom.AdwinsCom.dao.SupplierStatusDao;
+import com.AdwinsCom.AdwinsCom.Repository.SupplierStatusDao;
 import com.AdwinsCom.AdwinsCom.entity.SupplierStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -3,8 +3,8 @@ package com.AdwinsCom.AdwinsCom.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.AdwinsCom.AdwinsCom.dao.EmployeeDao;
-import com.AdwinsCom.AdwinsCom.dao.EmployeeStatusDao;
+import com.AdwinsCom.AdwinsCom.Repository.EmployeeDao;
+import com.AdwinsCom.AdwinsCom.Repository.EmployeeStatusDao;
 
 import com.AdwinsCom.AdwinsCom.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;

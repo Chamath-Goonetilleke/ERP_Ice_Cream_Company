@@ -1,4 +1,4 @@
-package com.AdwinsCom.AdwinsCom.dao;
+package com.AdwinsCom.AdwinsCom.Repository;
 import com.AdwinsCom.AdwinsCom.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

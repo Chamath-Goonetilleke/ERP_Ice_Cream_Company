@@ -24,5 +24,5 @@ package com.AdwinsCom.AdwinsCom.entity;// package com.forevercityhotel.supplier.
      @Id
      @ManyToOne(optional = false)
      @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
-     private Ingredeint ingredient_id;
+     private Ingredient ingredient_id;
  }

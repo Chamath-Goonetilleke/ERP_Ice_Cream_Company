@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
 
-import com.AdwinsCom.AdwinsCom.dao.EmployeeStatusDao;
+import com.AdwinsCom.AdwinsCom.Repository.EmployeeStatusDao;
 import com.AdwinsCom.AdwinsCom.entity.EmployeeStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
