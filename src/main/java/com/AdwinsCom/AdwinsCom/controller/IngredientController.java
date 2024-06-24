@@ -1,6 +1,6 @@
 package com.AdwinsCom.AdwinsCom.controller;
 
-import com.AdwinsCom.AdwinsCom.DTO.IngredientAddDTO;
+import com.AdwinsCom.AdwinsCom.DTO.IngredientDTO;
 import com.AdwinsCom.AdwinsCom.Service.IIngredientService;
 import com.AdwinsCom.AdwinsCom.Repository.IngredientRepository;
 import com.AdwinsCom.AdwinsCom.entity.Ingredient;
@@ -35,10 +35,38 @@ public class IngredientController {
     }
 
     @PostMapping("/addNewIngredient")
-    public ResponseEntity<?> AddNewIngredient(@RequestBody IngredientAddDTO ingredientAddDTO) {
+    public ResponseEntity<?> AddNewIngredient(@RequestBody IngredientDTO ingredientDTO) {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            return ingredientService.AddNewIngredient(ingredientAddDTO, auth.getName());
+            return ingredientService.AddNewIngredient(ingredientDTO, auth.getName());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/getAllIngredients")
+    public ResponseEntity<?> GetAllIngredients(){
+        try{
+            return ingredientService.GetAllIngredients();
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/updateIngredient")
+    public ResponseEntity<?> UpdateIngredient(@RequestBody IngredientDTO ingredientDTO){
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            return ingredientService.UpdateIngredient(ingredientDTO, auth.getName());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/deleteIngredient/{id}")
+    public ResponseEntity<?> DeleteIngredient(@PathVariable Integer id){
+        try {
+            return ingredientService.DeleteIngredient(id);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }

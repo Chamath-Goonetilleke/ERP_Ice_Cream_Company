@@ -29,13 +29,32 @@ const ajaxRequestBody = (url, method, object) =>{
         contentType: "application/json",
         async:false,
         success: function (data,status,ahr){
-            console.log(url + "\n"+ "Success " + status + " " + ahr);
+            console.log(url , "\n", "Success " , status , " " , ahr);
             console.log(data)
-            serverResponse = data;
+            serverResponse = ahr;
         },
         error:function (ahr,status, errormsg){
-            console.log(url + "\n"+ "Fail" + errormsg + " " + status + " " + ahr);
-            serverResponse = errormsg;
+            console.log(url , "\n", "Fail" , errormsg , " " , status , " " , ahr);
+            serverResponse = ahr;
+        }
+        ,
+    } );
+    return serverResponse;
+}
+const ajaxDeleteRequest = (url) =>{
+    let serverResponse ;
+    $.ajax(url,{
+        type: "DELETE",
+        contentType: "application/json",
+        async:false,
+        success: function (data,status,ahr){
+            console.log(url , "\n", "Success " , status , " " , ahr);
+            console.log(data)
+            serverResponse = ahr;
+        },
+        error:function (ahr,status, errormsg){
+            console.log(url , "\n", "Fail" , errormsg , " " , status , " " , ahr);
+            serverResponse = ahr;
         }
         ,
     } );

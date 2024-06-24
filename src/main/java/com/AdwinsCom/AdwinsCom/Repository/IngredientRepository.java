@@ -12,4 +12,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient,Integer> 
     @Query(value = "select new Ingredient (ing.id,ing.ingredientCode,ing.ingredientName) from Ingredient ing")
     List<Ingredient> getAvailableItemList();
 
+    Ingredient getIngredientByIngredientCode(String ingredientCode);
+
 }

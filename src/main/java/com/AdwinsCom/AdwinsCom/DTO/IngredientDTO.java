@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IngredientAddDTO {
+public class IngredientDTO {
     private String ingredientCode;
     private String ingredientName;
     private String note;
@@ -16,5 +16,4 @@ public class IngredientAddDTO {
     private Ingredient.UnitType unitType;
     private Integer rop;
     private Integer roq;
-    private Ingredient.IngredientStatus ingredientStatus;
 }

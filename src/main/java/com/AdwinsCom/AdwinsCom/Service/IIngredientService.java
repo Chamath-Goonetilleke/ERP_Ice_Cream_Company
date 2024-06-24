@@ -1,13 +1,12 @@
 package com.AdwinsCom.AdwinsCom.Service;
 
-import com.AdwinsCom.AdwinsCom.DTO.IngredientAddDTO;
-import com.AdwinsCom.AdwinsCom.entity.Ingredient;
+import com.AdwinsCom.AdwinsCom.DTO.IngredientDTO;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 public interface IIngredientService {
 
-    public ResponseEntity<?> AddNewIngredient(IngredientAddDTO ingredientAddDTO, String userName);
-    public List<Ingredient> GetAllIngredients();
+    public ResponseEntity<?> AddNewIngredient(IngredientDTO ingredientDTO, String userName);
+    public ResponseEntity<?> GetAllIngredients();
+    public ResponseEntity<?> UpdateIngredient(IngredientDTO ingredientDTO, String userName);
+    public ResponseEntity<?> DeleteIngredient(Integer id);
 }

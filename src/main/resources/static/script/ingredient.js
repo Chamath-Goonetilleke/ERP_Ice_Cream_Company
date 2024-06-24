@@ -1,6 +1,9 @@
-// ingredient.js
+let currentIngredient = {}
+window.addEventListener("load", () => {
+    getAllIngredients()
+})
 
-document.getElementById('ingredientForm').onsubmit = function(event) {
+document.getElementById('ingredientAddForm').onsubmit = function (event) {
     event.preventDefault();
 
     const ingredient = {
@@ -11,30 +14,139 @@ document.getElementById('ingredientForm').onsubmit = function(event) {
         unitType: document.getElementById('unitType').value,
         rop: parseInt(document.getElementById('rop').value, 10),
         roq: parseInt(document.getElementById('roq').value, 10),
-        ingredientStatus: document.getElementById('ingredientStatus').value
     };
 
-    console.log(ingredient);
-};
-const addNewIngredient = () => {
-    console.log("Button clicked");
-    // let ingredient = {
-    //     ingredientCode: "ING1234568",
-    //     ingredientName: "Tomato Paste",
-    //     note: "Organic and fresh",
-    //     quantity: 50,
-    //     unitType: "KG",
-    //     rop: 10,
-    //     roq: 20,
-    //     ingredientStatus: "InStock"
-    // };
-    //alert("Check");
-    let postServiceRequestResponse = ajaxRequestBody("/ingredient/addNewIngredient", "POST", ingredient);
-    Swal.fire({
-        title: "Save Successfully ..! ",
-        html: postServiceRequestResponse,
-        icon: "success"
-    });
+    let response = ajaxRequestBody("/ingredient/addNewIngredient", "POST", ingredient);
+    if (response.status === 200) {
+        swal.fire({
+            title: response.responseText,
+            icon: "success"
+        });
+        $("#modelIngredientAdd").modal('hide');
+        getAllIngredients()
+    } else {
+        swal.fire({
+            title: "Something Went Wrong",
+            text: response.responseText,
+            icon: "error"
+        });
+    }
 };
 
-console.log("ingredient.js loaded");
+const getAllIngredients = () => {
+    var ingredientList = []
+    ingredientList = ajaxGetRequest("/ingredient/getAllIngredients", "GET");
+    console.log(ingredientList);
+
+    const getQuantity = (ob) => {
+        return ob.quantity + " " + ob.unitType;
+    }
+    const getROP = (ob) => {
+        return ob.rop + " " + ob.unitType;
+    }
+    const getROQ = (ob) => {
+        return ob.roq + " " + ob.unitType;
+    }
+    const getStatus = (ob) => {
+        if (ob.ingredientStatus === "InStock") {
+            return '<div style="display: flex;justify-content: center;" ><span class="badge rounded-pill text-bg-success" style="font-size: 13px;">In Stock</span></div>'
+        }
+        if (ob.ingredientStatus === "LowStock") {
+            return '<div style="display: flex;justify-content: center;" ><span class="badge rounded-pill text-bg-warning" style="font-size: 13px;">Low Stock</span></div>'
+        }
+        if (ob.ingredientStatus === "OutOfStock") {
+            return '<div style="display: flex;justify-content: center;" ><span class="badge rounded-pill text-bg-danger" style="font-size: 13px;">Out of Stock</span></div>'
+        }
+    }
+    const displayProperty = [
+        {dataType: "text", propertyName: "ingredientCode"},
+        {dataType: "text", propertyName: "ingredientName"},
+        {dataType: "function", propertyName: getQuantity},
+        {dataType: "function", propertyName: getStatus},
+        {dataType: "function", propertyName: getROP},
+        {dataType: "function", propertyName: getROQ},
+    ];
+    let getPrivilege = ajaxGetRequest("/privilege/byloggedusermodule/EMPLOYEE")
+
+    tableDataBinder(
+        tableIngredient,
+        ingredientList,
+        displayProperty,
+        {name: "Edit Ingredient", action: editIngredient},
+        {name: "Delete Ingredient", action: deleteIngredient},
+        null,
+        true,
+        getPrivilege
+    )
+
+}
+
+const editIngredient = (ingredient) => {
+    $("#modelIngredientEdit").modal('show');
+    currentIngredient = ingredient;
+    document.getElementById('edit-ingredientCode').value = ingredient.ingredientCode
+    document.getElementById('edit-ingredientName').value = ingredient.ingredientName
+    document.getElementById('edit-note').value = ingredient.note
+    document.getElementById('edit-quantity').value = ingredient.quantity
+    document.getElementById('edit-unitType').value = ingredient.unitType
+    document.getElementById('edit-rop').value = ingredient.rop
+    document.getElementById('edit-roq').value = ingredient.roq
+}
+document.getElementById('ingredientEditForm').onsubmit = function (event) {
+    event.preventDefault();
+
+    currentIngredient.ingredientCode = document.getElementById('edit-ingredientCode').value
+    currentIngredient.ingredientName = document.getElementById('edit-ingredientName').value
+    currentIngredient.note = document.getElementById('edit-note').value
+    currentIngredient.quantity = parseInt(document.getElementById('edit-quantity').value, 10)
+    currentIngredient.unitType = document.getElementById('edit-unitType').value
+    currentIngredient.rop = parseInt(document.getElementById('edit-rop').value, 10)
+    currentIngredient.roq = parseInt(document.getElementById('edit-roq').value, 10)
+
+
+    let response = ajaxRequestBody("/ingredient/updateIngredient", "PUT", currentIngredient);
+    if (response.status === 200) {
+        swal.fire({
+            title: response.responseText,
+            icon: "success"
+        });
+        $("#modelIngredientEdit").modal('hide');
+        getAllIngredients()
+    } else {
+        swal.fire({
+            title: "Something Went Wrong",
+            text: response.responseText,
+            icon: "error"
+        });
+    }
+};
+const deleteIngredient = (ingredient) => {
+    swal.fire({
+        title: "Delete Ingredient",
+        text: "Are you sure, you want to delete this?",
+       // html:updates,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#cb421a",
+        cancelButtonColor: "#3f3f44",
+        confirmButtonText: "Yes, Delete"
+    }).then((result)=>{
+        if(result.isConfirmed){
+            let response = ajaxDeleteRequest(`/ingredient/deleteIngredient/${ingredient.id}`)
+            if (response.status === 200) {
+                swal.fire({
+                    title: response.responseText,
+                    icon: "success"
+                });
+                $("#modelIngredientEdit").modal('hide');
+                getAllIngredients()
+            } else {
+                swal.fire({
+                    title: "Something Went Wrong",
+                    text: response.responseText,
+                    icon: "error"
+                });
+            }
+        }
+    })
+}

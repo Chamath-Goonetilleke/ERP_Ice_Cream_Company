@@ -1,15 +1,12 @@
 package com.AdwinsCom.AdwinsCom.entity;
 
-import com.AdwinsCom.AdwinsCom.DTO.IngredientAddDTO;
+import com.AdwinsCom.AdwinsCom.DTO.IngredientDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -74,8 +71,15 @@ public class Ingredient {
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
-    public Ingredient mapDTO(IngredientAddDTO addDTO,String userName) {
+    public Ingredient mapDTO(Ingredient ingredient,IngredientDTO addDTO, String userName) {
         Ingredient newIngredient = new Ingredient();
+        if(ingredient != null){
+            newIngredient = ingredient;
+            ingredient.setUpdatedUser(userName);
+        }else {
+            newIngredient.setAddedUser(userName);
+            newIngredient.setAddedDate(LocalDateTime.now());
+        }
         newIngredient.setIngredientCode(addDTO.getIngredientCode());
         newIngredient.setIngredientName(addDTO.getIngredientName());
         newIngredient.setNote(addDTO.getNote());
@@ -83,9 +87,7 @@ public class Ingredient {
         newIngredient.setUnitType(addDTO.getUnitType());
         newIngredient.setRop(addDTO.getRop());
         newIngredient.setRoq(addDTO.getRoq());
-        newIngredient.setIngredientStatus(addDTO.getIngredientStatus());
-        newIngredient.setAddedUser(userName);
-        newIngredient.setAddedDate(LocalDateTime.now());
+
         return newIngredient;
     }
 }
