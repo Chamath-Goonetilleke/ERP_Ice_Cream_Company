@@ -1,13 +1,17 @@
 package com.AdwinsCom.AdwinsCom.controller;
 import java.util.List;
-import com.AdwinsCom.AdwinsCom.Repository.SupplierDao;
+
+import com.AdwinsCom.AdwinsCom.DTO.SupplierDTO;
+import com.AdwinsCom.AdwinsCom.Repository.SupplierRepository;
+import com.AdwinsCom.AdwinsCom.Service.ISupplierService;
 import com.AdwinsCom.AdwinsCom.entity.Supplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -16,10 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SupplierController {
     
     @Autowired
-    private SupplierDao suppplierDao;
-
-    // @Autowired
-    // private SupplierStatus supStatusDao;
+    private ISupplierService supplierService;
 
     @GetMapping
     public ModelAndView supplierModelAndView() {
@@ -28,14 +29,34 @@ public class SupplierController {
         return supplierMV;
     }
 
-    @GetMapping(value = "/list", produces = "application/json")
-    public List<Supplier> supplierList() {
-        return suppplierDao.findAll(Sort.by(Direction.DESC, "id"));
+    @PostMapping("/addNewSupplier")
+    public ResponseEntity<?> AddNewSupplier(@RequestBody SupplierDTO supplierDTO){
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            return supplierService.AddNewSupplier(supplierDTO, auth.getName());
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
 
-    @GetMapping(value = "/suplist", produces = "application/json")
-    public List<Supplier> list(){
-        return suppplierDao.list();
+    @GetMapping("/getAllSuppliers")
+    public ResponseEntity<?> GetAllSuppliers(){
+        try{
+            return supplierService.GetAllSuppliers();
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
     }
+
+    @PutMapping("/updateSupplier")
+    public ResponseEntity<?> UpdateSupplier(@RequestBody SupplierDTO supplierDTO){
+        try{
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            return supplierService.UpdateSupplier(supplierDTO, auth.getName());
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
 
 }

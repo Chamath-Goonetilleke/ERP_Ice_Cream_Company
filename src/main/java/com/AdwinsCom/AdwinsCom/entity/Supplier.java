@@ -1,15 +1,9 @@
 package com.AdwinsCom.AdwinsCom.entity;
+import java.time.LocalDateTime;
 import java.util.Set;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import com.AdwinsCom.AdwinsCom.DTO.SupplierDTO;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,26 +16,31 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Supplier {
 
+    public enum SupplierStatus{
+        Active,
+        InActive
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "regno", unique = true)
+    @Column(name = "reg_no", unique = true)
     @NotNull
-    private String regno;
+    private String regNo;
 
-    @Column(name = "suppliername")
+    @Column(name = "supplier_name")
     @NotNull
-    private String suppliername;
+    private String supplierName;
 
-    @Column(name = "contactpersonname")
+    @Column(name = "contact_person_name")
     @NotNull
-    private String contactpersonname;
+    private String contactPersonName;
 
-    @Column(name = "contactno")
+    @Column(name = "contact_no")
     @NotNull
-    private String contactno;
+    private String contactNo;
 
     @Column(name = "email", unique = true)
     @NotNull
@@ -51,23 +50,56 @@ public class Supplier {
     @NotNull
     private String address;
 
-    @Column(name = "brn")
-    private String brn;
-
     @Column(name = "note")
     private String note;
 
-    @ManyToOne
-    @JoinColumn(name = "supplierstatus_id", referencedColumnName = "id")
-    private SupplierStatus supplierstatus_id;
+    @Column(name = "join_date")
+    private LocalDateTime joinDate;
 
-    @ManyToMany
-    @JoinTable(name = "supplier_has_ingredient", joinColumns = @JoinColumn(name = "supplier_id"), inverseJoinColumns = @JoinColumn(name = "ingredeint_id"))
+    @Column(name = "supplier_status")
+    @Enumerated(EnumType.STRING)
+    private SupplierStatus supplierStatus;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "supplier_ingredients",
+            joinColumns = @JoinColumn(name = "supplier_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private Set<Ingredient> ingredients;
 
-    public Supplier(Integer id, String suppliername){
-        this.id = id;
-        this.suppliername = suppliername;
-    }
+    @Column(name = "added_user")
+    @NotNull
+    private String addedUser;
 
+    @Column(name = "added_date")
+    private LocalDateTime addedDate;
+
+    @JoinColumn(name = "updated_user")
+    private String updatedUser;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+
+    public Supplier mapDTO(Supplier supplier, SupplierDTO supplierDTO, String userName){
+        Supplier newSupplier = new Supplier();
+        if(supplier != null){
+            newSupplier = supplier;
+            newSupplier.setUpdatedUser(userName);
+            newSupplier.setUpdatedDate(LocalDateTime.now());
+        }else {
+            newSupplier.setAddedUser(userName);
+            newSupplier.setAddedDate(LocalDateTime.now());
+        }
+        newSupplier.setRegNo(supplierDTO.getRegNo());
+        newSupplier.setSupplierName(supplierDTO.getSupplierName());
+        newSupplier.setContactPersonName(supplierDTO.getContactPersonName());
+        newSupplier.setContactNo(supplierDTO.getContactNo());
+        newSupplier.setEmail(supplierDTO.getEmail());
+        newSupplier.setAddress(supplierDTO.getAddress());
+        newSupplier.setJoinDate(supplierDTO.getJoinDate());
+        newSupplier.setSupplierStatus(supplierDTO.getSupplierStatus());
+        newSupplier.setIngredients(supplierDTO.getIngredients());
+        newSupplier.setNote(supplierDTO.getNote());
+
+        return newSupplier;
+    }
 }

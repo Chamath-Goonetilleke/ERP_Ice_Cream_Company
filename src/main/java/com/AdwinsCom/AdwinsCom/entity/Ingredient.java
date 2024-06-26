@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingredient")
@@ -71,11 +72,15 @@ public class Ingredient {
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
 
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Supplier> suppliers;
+
     public Ingredient mapDTO(Ingredient ingredient,IngredientDTO addDTO, String userName) {
         Ingredient newIngredient = new Ingredient();
         if(ingredient != null){
             newIngredient = ingredient;
-            ingredient.setUpdatedUser(userName);
+            newIngredient.setUpdatedUser(userName);
+            newIngredient.setUpdatedDate(LocalDateTime.now());
         }else {
             newIngredient.setAddedUser(userName);
             newIngredient.setAddedDate(LocalDateTime.now());

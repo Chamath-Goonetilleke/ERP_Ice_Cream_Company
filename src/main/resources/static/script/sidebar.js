@@ -14,7 +14,6 @@ window.addEventListener('load', function () {
           offcanvasElement.classList.add("show");
         } else {
           offcanvasElement.classList.remove("show");
-          console.log(window);
 
         }
       }

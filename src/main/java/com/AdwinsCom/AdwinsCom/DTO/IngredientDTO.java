@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientDTO {
+    private Integer id;
     private String ingredientCode;
     private String ingredientName;
     private String note;

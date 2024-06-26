@@ -22,7 +22,8 @@ public class WebConfiguration {
                             .requestMatchers("/dashboard/**").hasAnyAuthority("Admin", "Manager", "Cashier", "Store-Manager")
                             .requestMatchers("/employee/**").hasAnyAuthority("Admin", "Manager")
                             .requestMatchers("/privilege/**").hasAnyAuthority("Admin")
-                            .requestMatchers("/ingredient/addNewIngredient").hasAnyAuthority("Admin")
+                            .requestMatchers("/ingredient/**").hasAnyAuthority("Admin")
+                            .requestMatchers("/supplier/**").permitAll()
                             .requestMatchers("/user/**").hasAnyAuthority("Admin", "Manager")
                             .requestMatchers("/item/**").hasAnyAuthority("Admin", "Manager", "Cashier", "Store-Manager")
                             .anyRequest().authenticated();

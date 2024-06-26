@@ -48,4 +48,8 @@ public class IngredientService implements IIngredientService {
         ingredientRepository.deleteById(id);
         return ResponseEntity.ok("Ingredient Deleted Successfully");
     }
+
+    public Ingredient GetIngredient(Integer id){
+        return ingredientRepository.findById(id).get();
+    }
 }
